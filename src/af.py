@@ -4,12 +4,12 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-def get_args():
+def updated_get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--num_samples', type=int, required=True)
-    parser.add_argument('--num_sites', type=int, required=True)
-    parser.add_argument('--max_offspring', type=float, required=True)
-    parser.add_argument('--max_generations', type=int, default=10)
+    parser.add_argument('--num_samples', type=positive_int, required=True)
+    parser.add_argument('--num_sites', type=positive_int, required=True)
+    parser.add_argument('--max_offspring', type=positive_float, required=True)
+    parser.add_argument('--max_generations', type=positive_int, default=10)
     return parser.parse_args()
 
 def get_ac(P):
@@ -68,17 +68,7 @@ def main_with_timestamp():
     try:
         args = get_args()
         
-        # Validate inputs
-        if args.num_samples <= 0:
-            raise ValueError("Number of samples should be a positive integer.")
-        if args.num_sites <= 0:
-            raise ValueError("Number of sites should be a positive integer.")
-        if args.max_offspring <= 0:
-            raise ValueError("Maximum offspring should be a positive value.")
-        if args.max_generations <= 0:
-            raise ValueError("Maximum generations should be a positive integer.")
-
-        run_name = '-'.join(['num_sites', str(args.num_sites),
+                run_name = '-'.join(['num_sites', str(args.num_sites),
                              'num_samples', str(args.num_samples),
                              'max_generations', str(args.max_generations),
                              'max_offspring', str(args.max_offspring)])
